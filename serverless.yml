@@ -1,0 +1,18 @@
+service: tnrreviewsapi
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  iamRoleStatements:
+      -  Effect: "Allow"
+         Action:
+           - "s3:*"
+         Resource: "arn:aws:s3:::tnrshows/*"
+
+functions:
+  getInterviews:
+    handler: handler.getInterviews
+    events:
+      - http:
+          path: api/v1/interviews
+          method: get
